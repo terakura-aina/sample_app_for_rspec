@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :task do
-    title { :test }
+    title { "test" }
     status { :todo }
     association :user
   end
