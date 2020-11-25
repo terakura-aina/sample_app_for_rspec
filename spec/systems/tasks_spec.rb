@@ -5,7 +5,7 @@ RSpec.describe 'tasks', type: :system do
   let(:task) { create(:task) }
 
   describe 'ログイン前' do
-    describe 'タスクページ移管確認' do
+    describe 'タスクページ確認' do
       context 'タスクの新規作成登録ページへアクセス' do
         it '新規登録ページへのアクセスが失敗する' do
           visit new_task_path
