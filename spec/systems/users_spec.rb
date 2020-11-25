@@ -8,9 +8,9 @@ RSpec.describe 'Users', type: :system do
       context 'フォームの入力値が正常' do
         it 'ユーザーの新規作成が成功する' do
           visit sign_up_path
-          fill_in 'Email', with:"sample@example.com"
-          fill_in 'Password', with:"foobar"
-          fill_in 'Password confirmation', with:"foobar"
+          fill_in 'Email', with: "sample@example.com"
+          fill_in 'Password', with: 'foobar'
+          fill_in 'Password confirmation', with: 'foobar'
           click_button 'SignUp'
           expect(page).to have_content 'User was successfully created.'
           expect(current_path).to eq login_path
@@ -20,9 +20,9 @@ RSpec.describe 'Users', type: :system do
       context 'メールアドレスが未入力' do
         it 'ユーザーの新規作成が失敗する' do
           visit sign_up_path
-          fill_in 'Email', with:" "
-          fill_in 'Password', with:"foobar"
-          fill_in 'Password confirmation', with:"foobar"
+          fill_in 'Email', with: ''
+          fill_in 'Password', with: 'foobar'
+          fill_in 'Password confirmation', with: 'foobar'
           click_button 'SignUp'
           expect(page).to have_content "Email can't be blank"
           expect(current_path).to eq users_path
@@ -34,10 +34,10 @@ RSpec.describe 'Users', type: :system do
           other_user = create(:user)
           visit sign_up_path
           fill_in 'Email', with:other_user.email
-          fill_in 'Password', with:"foobar"
-          fill_in 'Password confirmation', with:"foobar"
+          fill_in 'Password', with: 'foobar'
+          fill_in 'Password confirmation', with: 'foobar'
           click_button 'SignUp'
-          expect(page).to have_content "Email has already been taken"
+          expect(page).to have_content 'Email has already been taken'
           expect(current_path).to eq users_path
         end
       end
@@ -47,7 +47,7 @@ RSpec.describe 'Users', type: :system do
       context 'ログインしていない状態' do
         it 'マイページへのアクセスが失敗する' do
           visit user_path(user.id)
-          expect(page).to have_content "Login required"
+          expect(page).to have_content 'Login required'
           expect(current_path).to eq login_path
         end
       end
@@ -61,11 +61,11 @@ RSpec.describe 'Users', type: :system do
       context 'フォームの入力値が正常' do
         it 'ユーザーの編集が成功する' do
           visit edit_user_path(user)
-          fill_in 'Email', with:"update@example.com"
-          fill_in 'Password', with:"update"
-          fill_in 'Password confirmation', with:"update"
+          fill_in 'Email', with: "update@example.com"
+          fill_in 'Password', with: 'update'
+          fill_in 'Password confirmation', with: 'update'
           click_button 'Update'
-          expect(page).to have_content "User was successfully updated."
+          expect(page).to have_content 'User was successfully updated.'
           expect(current_path).to eq user_path(user)
         end
       end
@@ -73,9 +73,9 @@ RSpec.describe 'Users', type: :system do
       context 'メールアドレスが未入力' do
         it 'ユーザーの編集が失敗する' do
           visit edit_user_path(user)
-          fill_in 'Email', with:" "
-          fill_in 'Password', with:"update"
-          fill_in 'Password confirmation', with:"update"
+          fill_in 'Email', with: ''
+          fill_in 'Password', with: 'update'
+          fill_in 'Password confirmation', with: 'update'
           click_button 'Update'
           expect(page).to have_content "Email can't be blank"
           expect(current_path).to eq user_path(user)
@@ -86,11 +86,11 @@ RSpec.describe 'Users', type: :system do
         it 'ユーザーの編集が失敗する' do
           other_user = create(:user)
           visit edit_user_path(user)
-          fill_in 'Email', with:other_user.email
-          fill_in 'Password', with:"update"
-          fill_in 'Password confirmation', with:"update"
+          fill_in 'Email', with: other_user.email
+          fill_in 'Password', with: 'update'
+          fill_in 'Password confirmation', with: 'update'
           click_button 'Update'
-          expect(page).to have_content "Email has already been taken"
+          expect(page).to have_content 'Email has already been taken'
           expect(current_path).to eq user_path(user)
         end
       end
@@ -99,7 +99,7 @@ RSpec.describe 'Users', type: :system do
         it '編集ページへのアクセスが失敗する' do
           other_user = create(:user)
           visit edit_user_path(other_user)
-          expect(page).to have_content "Forbidden access."
+          expect(page).to have_content 'Forbidden access.'
           expect(current_path).to eq user_path(user)
         end
       end
