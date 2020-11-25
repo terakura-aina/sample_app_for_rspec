@@ -31,8 +31,8 @@ RSpec.describe 'tasks', type: :system do
       context 'フォームの入力値が正常' do
         it 'タスクの新規作成が成功する' do
           visit new_task_path
-          fill_in 'Title', with:'title'
-          fill_in 'Content', with:'content'
+          fill_in 'Title', with: 'title'
+          fill_in 'Content', with: 'content'
           select 'todo', from: 'Status'
           click_button 'Create Task'
           expect(page).to have_content 'Task was successfully created.'
@@ -47,8 +47,8 @@ RSpec.describe 'tasks', type: :system do
       context 'titleが未入力' do
         it 'タスクの新規作成が失敗する' do
           visit new_task_path
-          fill_in 'Title', with:''
-          fill_in 'Content', with:'content'
+          fill_in 'Title', with: ''
+          fill_in 'Content', with: 'content'
           click_button 'Create Task'
           expect(page).to have_content "Title can't be blank"
           expect(current_path).to eq tasks_path
@@ -59,8 +59,8 @@ RSpec.describe 'tasks', type: :system do
         it 'タスクの新規作成が失敗する' do
           visit new_task_path
           other_task = create(:task)
-          fill_in 'Title', with:other_task.title
-          fill_in 'Content', with:'content'
+          fill_in 'Title', with: other_task.title
+          fill_in 'Content', with: 'content'
           click_button 'Create Task'
           expect(page).to have_content 'Title has already been taken'
           expect(current_path).to eq tasks_path
@@ -75,8 +75,8 @@ RSpec.describe 'tasks', type: :system do
       context 'フォームの入力値が正常' do
         it 'タスクの編集に成功する' do
           visit edit_task_path(task)
-          fill_in 'Title', with:"update_title"
-          fill_in 'Content', with:"update_content"
+          fill_in 'Title', with: 'update_title'
+          fill_in 'Content', with: 'update_content'
           select 'todo', from: 'Status'
           click_button 'Update Task'
           expect(page).to have_content 'Task was successfully updated.'
@@ -91,8 +91,8 @@ RSpec.describe 'tasks', type: :system do
       context 'titleが未入力' do
         it 'タスクの編集に失敗する' do
           visit edit_task_path(task)
-          fill_in 'Title', with:""
-          fill_in 'Content', with:"update_content"
+          fill_in 'Title', with: ''
+          fill_in 'Content', with: 'update_content'
           click_button 'Update Task'
           expect(page).to have_content "Title can't be blank"
           expect(current_path).to eq task_path(task)
@@ -103,7 +103,7 @@ RSpec.describe 'tasks', type: :system do
         it 'タスクの編集に失敗する' do
           visit edit_task_path(task)
           fill_in 'Title', with:other_task.title
-          fill_in 'Content', with:"update_content"
+          fill_in 'Content', with: 'update_content'
           click_button 'Update Task'
           expect(page).to have_content 'Title has already been taken'
           expect(current_path).to eq task_path(task)
